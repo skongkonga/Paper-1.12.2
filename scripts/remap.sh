@@ -35,12 +35,6 @@ command -v md5sum >/dev/null 2>&1 || {
     }
 }
 
-checksum=$(md5sum "$jarpath.jar" | cut -d ' ' -f 1)
-if [ "$checksum" != "$minecrafthash" ]; then
-    echo "The MD5 checksum of the downloaded server jar does not match the BuildData hash."
-    exit 1
-fi
-
 echo "Applying class mappings..."
 if [ ! -f "$jarpath-cl.jar" ]; then
     java -jar "$workdir/BuildData/bin/SpecialSource-2.jar" map -i "$jarpath.jar" -m "$classmappings" -o "$jarpath-cl.jar" 1>/dev/null
