@@ -1,0 +1,60 @@
+From 4e50771d7ee121ef1deae5b02eab14a60534abf0 Mon Sep 17 00:00:00 2001
+From: skongkonga <3139771198@qq.com>
+Date: Fri, 18 Oct 2024 12:06:01 +0800
+Subject: [PATCH] feat: add PlayerReceiveMessageEvent
+
+
+diff --git a/src/main/java/org/bukkit/event/player/PlayerReceiveMessageEvent.java b/src/main/java/org/bukkit/event/player/PlayerReceiveMessageEvent.java
+new file mode 100644
+index 00000000..24e3e01d
+--- /dev/null
++++ b/src/main/java/org/bukkit/event/player/PlayerReceiveMessageEvent.java
+@@ -0,0 +1,45 @@
++package org.bukkit.event.player;
++
++import org.bukkit.entity.Player;
++import org.bukkit.event.Cancellable;
++import org.bukkit.event.HandlerList;
++
++public class PlayerReceiveMessageEvent extends PlayerEvent implements Cancellable {
++    private static final HandlerList handlers = new HandlerList();
++
++    private boolean cancelled = false;
++
++    private String message;
++
++    public PlayerReceiveMessageEvent(final Player player, final String message) {
++        super(player);
++        this.message = message;
++    }
++
++    public String getMessage() {
++        return message;
++    }
++
++    public void setMessage(String message) {
++        this.message = message;
++    }
++
++    @Override
++    public HandlerList getHandlers() {
++        return handlers;
++    }
++
++    public static HandlerList getHandlerList() {
++        return handlers;
++    }
++
++    @Override
++    public boolean isCancelled() {
++        return this.cancelled;
++    }
++
++    @Override
++    public void setCancelled(boolean cancel) {
++        this.cancelled = cancel;
++    }
++}
+-- 
+2.42.0.windows.2
+
