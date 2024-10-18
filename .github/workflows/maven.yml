@@ -25,6 +25,10 @@ jobs:
         java-version: '8.0'
         distribution: 'adopt'
         cache: maven
+    - name: Set git email
+      run: git config --global user.email "github@github.com"
+    - name: Set git name
+      run: git config --global user.name "github"
     - name: Build with paper
       run: ./paper jar
     - name: Upload build artifact
