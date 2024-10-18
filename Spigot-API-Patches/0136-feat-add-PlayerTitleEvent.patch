@@ -1,0 +1,104 @@
+From d32be8ab7907f323725043598d378af796c68be4 Mon Sep 17 00:00:00 2001
+From: skongkonga <3139771198@qq.com>
+Date: Fri, 18 Oct 2024 12:06:22 +0800
+Subject: [PATCH] feat: add PlayerTitleEvent
+
+
+diff --git a/src/main/java/org/bukkit/event/player/PlayerTitleEvent.java b/src/main/java/org/bukkit/event/player/PlayerTitleEvent.java
+new file mode 100644
+index 00000000..b0a068d6
+--- /dev/null
++++ b/src/main/java/org/bukkit/event/player/PlayerTitleEvent.java
+@@ -0,0 +1,89 @@
++package org.bukkit.event.player;
++
++import org.bukkit.entity.Player;
++import org.bukkit.event.Cancellable;
++import org.bukkit.event.HandlerList;
++
++public class PlayerTitleEvent extends PlayerEvent implements Cancellable {
++    private static final HandlerList handlers = new HandlerList();
++
++    private boolean cancelled = false;
++
++    private String title;
++
++    private String subtitle;
++
++    private int fadeIn;
++
++    private int stay;
++
++    private int fadeOut;
++
++    public PlayerTitleEvent(final Player player, final String title, final String subtitle, int fadeIn, int stay, int fadeOut) {
++        super(player);
++        this.title = title;
++        this.subtitle = subtitle;
++        this.fadeIn = fadeIn;
++        this.stay = stay;
++        this.fadeOut = fadeOut;
++    }
++
++    public String getTitle() {
++        return title;
++    }
++
++    public String getSubtitle() {
++        return subtitle;
++    }
++
++    public int getFadeIn() {
++        return fadeIn;
++    }
++
++    public int getStay() {
++        return stay;
++    }
++
++    public int getFadeOut() {
++        return fadeOut;
++    }
++
++    public void setTitle(String title) {
++        this.title = title;
++    }
++
++    public void setSubtitle(String subtitle) {
++        this.subtitle = subtitle;
++    }
++
++    public void setFadeIn(int fadeIn) {
++        this.fadeIn = fadeIn;
++    }
++
++    public void setStay(int stay) {
++        this.stay = stay;
++    }
++
++    public void setFadeOut(int fadeOut) {
++        this.fadeOut = fadeOut;
++    }
++
++    @Override
++    public HandlerList getHandlers() {
++        return handlers;
++    }
++
++    public static HandlerList getHandlerList() {
++        return handlers;
++    }
++
++    @Override
++    public boolean isCancelled() {
++        return cancelled;
++    }
++
++    @Override
++    public void setCancelled(boolean cancelled) {
++        this.cancelled = cancelled;
++    }
++}
+-- 
+2.42.0.windows.2
+
