@@ -1,0 +1,22 @@
+From 25008b8e2c47356fc75d59a44f27a73e78e09dad Mon Sep 17 00:00:00 2001
+From: skongkonga <3139771198@qq.com>
+Date: Sat, 19 Oct 2024 16:50:18 +0800
+Subject: [PATCH] feat: PacketPlayOutKeepAlive retry 10 times
+
+
+diff --git a/src/main/java/net/minecraft/server/PlayerConnection.java b/src/main/java/net/minecraft/server/PlayerConnection.java
+index 8fe2fd50e..c824af4b4 100644
+--- a/src/main/java/net/minecraft/server/PlayerConnection.java
++++ b/src/main/java/net/minecraft/server/PlayerConnection.java
+@@ -194,7 +194,7 @@ public class PlayerConnection implements PacketListenerPlayIn, ITickable {
+                 PlayerConnection.LOGGER.warn("{} was kicked due to keepalive timeout!", this.player.getName()); // more info
+                 this.disconnect(new ChatMessage("disconnect.timeout"));
+             }
+-            if (elapsedTime >= 15000L && alive_retries < 1) { // 15 seconds
++            if (elapsedTime >= 15000L && alive_retries < 101) { // 15 seconds
+                 if (alive_retries % 10 == 0) {
+                     this.sendPacket(new PacketPlayOutKeepAlive(this.getKeepAliveID()));
+                 }
+-- 
+2.42.0.windows.2
+
