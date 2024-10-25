@@ -1,0 +1,22 @@
+From e9f39b215a378064e1ab0b640f211bd4d78d4cd2 Mon Sep 17 00:00:00 2001
+From: skongkonga <3139771198@qq.com>
+Date: Fri, 25 Oct 2024 13:44:31 +0800
+Subject: [PATCH] feat: decrease lightning range
+
+
+diff --git a/src/main/java/net/minecraft/server/WorldServer.java b/src/main/java/net/minecraft/server/WorldServer.java
+index e545e9764..ddb88bca0 100644
+--- a/src/main/java/net/minecraft/server/WorldServer.java
++++ b/src/main/java/net/minecraft/server/WorldServer.java
+@@ -1269,7 +1269,7 @@ public class WorldServer extends World implements IAsyncTaskHandler {
+         }
+         // CraftBukkit end
+         if (super.strikeLightning(entity)) {
+-            this.server.getPlayerList().sendPacketNearby((EntityHuman) null, entity.locX, entity.locY, entity.locZ, 512.0D, this, new PacketPlayOutSpawnEntityWeather(entity)); // CraftBukkit - Use dimension, // Paper - use world instead of dimension
++            this.server.getPlayerList().sendPacketNearby((EntityHuman) null, entity.locX, entity.locY, entity.locZ, 128.0D, this, new PacketPlayOutSpawnEntityWeather(entity)); // CraftBukkit - Use dimension, // Paper - use world instead of dimension
+             return true;
+         } else {
+             return false;
+-- 
+2.42.0.windows.2
+
