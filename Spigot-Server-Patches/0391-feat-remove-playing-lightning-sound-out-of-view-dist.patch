@@ -1,0 +1,27 @@
+From 64f253bcca0ea80b3e5f70dc35cd759abd115b56 Mon Sep 17 00:00:00 2001
+From: skongkonga <3139771198@qq.com>
+Date: Fri, 25 Oct 2024 16:57:11 +0800
+Subject: [PATCH] feat: remove playing lightning sound out of view distance
+
+
+diff --git a/src/main/java/net/minecraft/server/EntityLightning.java b/src/main/java/net/minecraft/server/EntityLightning.java
+index acb3408d5..057135ca9 100644
+--- a/src/main/java/net/minecraft/server/EntityLightning.java
++++ b/src/main/java/net/minecraft/server/EntityLightning.java
+@@ -70,12 +70,7 @@ public class EntityLightning extends EntityWeather {
+                 double deltaX = this.locX - player.locX;
+                 double deltaZ = this.locZ - player.locZ;
+                 double distanceSquared = deltaX * deltaX + deltaZ * deltaZ;
+-                if (distanceSquared > viewDistance * viewDistance) {
+-                    double deltaLength = Math.sqrt(distanceSquared);
+-                    double relativeX = player.locX + (deltaX / deltaLength) * viewDistance;
+-                    double relativeZ = player.locZ + (deltaZ / deltaLength) * viewDistance;
+-                    player.playerConnection.sendPacket(new PacketPlayOutNamedSoundEffect(SoundEffects.dK, SoundCategory.WEATHER, relativeX, this.locY, relativeZ, 10000.0F, pitch));
+-                } else {
++                if (distanceSquared <= viewDistance * viewDistance) {
+                     player.playerConnection.sendPacket(new PacketPlayOutNamedSoundEffect(SoundEffects.dK, SoundCategory.WEATHER, this.locX, this.locY, this.locZ, 10000.0F, pitch));
+                 }
+             }
+-- 
+2.42.0.windows.2
+
